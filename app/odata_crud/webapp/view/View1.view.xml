@@ -1,14 +1,15 @@
 <mvc:View
     controllerName="odatacrud.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
 >
-    <Page
-        id="page"
-        title="{i18n>title}"
-    >
-        <Table id="_IDGenTable1">
+    <Page id="_IDGenPage1">
+        <Table id="_IDGenTable1"
+        growing="true"
+		growingThreshold="10"
+		items="{
+		path: '/Funcionario'}">
             <columns>
                 <Column id="_IDGenColumn1">
                     <Text
@@ -17,14 +18,57 @@
                     />
                 </Column>
             </columns>
+            <columns>
+                <Column id="_IDGenColumn2">
+                    <Text
+                        id="_IDGenText2"
+                        text="Nome"
+                    />
+                </Column>
+            </columns>
+            <columns>
+                <Column id="_IDGenColumn3">
+                    <Text
+                        id="_IDGenText3"
+                        text="Genero"
+                    />
+                </Column>
+            </columns>
+            <columns>
+                <Column id="_IDGenColumn4">
+                    <Text
+                        id="_IDGenText4"
+                        text="Estado"
+                    />
+                </Column>
+            </columns>
             <items>
                 <ColumnListItem id="_IDGenColumnListItem1">
                     <cells>
                         <Text
-                            id="_IDGenText2"
+                            id="_IDGenTextID"
                             text="{ID}"
                         />
                     </cells>
+                    <cells>
+                        <Text
+                            id="_IDGenTextNome"
+                            text="{Nome}"
+                        />
+                    </cells>
+                    <cells>
+                        <Text
+                            id="_IDGenTextGenero"
+                            text="{Genero}"
+                        />
+                    </cells>
+                    <cells>
+                        <Text
+                            id="_IDGenTextEstado"
+                            text="{Estado}"
+                        />
+                    </cells>
+                    
                 </ColumnListItem>
             </items>
         </Table>
