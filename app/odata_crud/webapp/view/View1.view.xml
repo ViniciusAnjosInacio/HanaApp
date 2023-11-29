@@ -1,7 +1,32 @@
-<mvc:View controllerName="odatacrud.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+<mvc:View
+    controllerName="odatacrud.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <Table id="_IDGenTable1">
+            <columns>
+                <Column id="_IDGenColumn1">
+                    <Text
+                        id="_IDGenText1"
+                        text="ID"
+                    />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="_IDGenColumnListItem1">
+                    <cells>
+                        <Text
+                            id="_IDGenText2"
+                            text="{ID}"
+                        />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
     </Page>
 </mvc:View>

@@ -9,7 +9,7 @@ sap.ui.define([
 
         return Controller.extend("odatacrud.controller.View1", {
             onInit: function () {
-
+                
             }
         });
     });
