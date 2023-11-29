@@ -8,12 +8,11 @@
     "dependencies": {
         "@sap/cds": "^7",
         "@sap/cds-hana": "^2",
+        "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
         "@sap/hana-client": "^2.18.27",
         "@sap/xssec": "^3",
-        "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
         "express": "^4",
         "passport": "^0"
-        
     },
     "devDependencies": {
         "@cap-js/sqlite": "^1",
@@ -27,7 +26,8 @@
         "watch-frontend": "cds watch --open frontend/webapp/index.html?sap-ui-xx-viewCache=false",
         "undeploy": "cf undeploy MyHANAApp --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+        "watch-odata_crud": "cds watch --open odata_crud/webapp/index.html?sap-ui-xx-viewCache=false"
     },
     "cds": {
         "requires": {
