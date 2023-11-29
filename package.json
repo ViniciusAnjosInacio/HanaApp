@@ -10,8 +10,10 @@
         "@sap/cds-hana": "^2",
         "@sap/hana-client": "^2.18.27",
         "@sap/xssec": "^3",
+        "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
         "express": "^4",
         "passport": "^0"
+        
     },
     "devDependencies": {
         "@cap-js/sqlite": "^1",

@@ -22,3 +22,11 @@ entity Interactions_Items {
         LOGTEXT : LText;
 };
 
+entity Funcionario {
+  key ID : Integer;
+  Nome   : String(100);
+  Estado : String(2);
+  Pais   : Country;
+  Genero : String(10);
+};
+
