@@ -1,10 +1,13 @@
 <mvc:View
-    controllerName="odatacrud.controller.View1"
-    displayBlock="true"
+    controllerName="valefuncionarioscrud.controller.App"
     xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
     xmlns="sap.m"
 >
-    <Page id="_IDGenPage1">
+    <Page
+        id="_IDGenPage1"
+        title="{i18n>title}"
+    >
         <Table
             id="_IDGenTable1"
             growing="true"
@@ -12,19 +15,34 @@
             items="{
 		path: '/Funcionario',
 								parameters: {
-									$count: true
+									$count: true,
+                                    $$updateGroupId : 'peopleGroup'
 								}
-                                }"
-        >
+                                }">
+                                
             <headerToolbar>
                 <OverflowToolbar id="_IDGenOverflowToolbar1">
                     <content>
                         <ToolbarSpacer id="_IDGenToolbarSpacer1" />
                         <SearchField
-											id="searchField"
-											width="20%"
-											placeholder="{i18n>searchFieldPlaceholder}"
-											search=".onSearch"/>
+                            id="searchField"
+                            width="20%"
+                            placeholder="{i18n>searchFieldPlaceholder}"
+                            enabled="{= !${appView>/hasUIChanges}}"
+                            search=".onSearch"
+                        />
+
+                        <Button
+											id="addUserButton"
+											icon="sap-icon://add"
+											tooltip="{i18n>createButtonText}"
+											press=".onCreate">
+											<layoutData>
+												<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="NeverOverflow"/>
+											</layoutData>
+										</Button>
+
+
                         <Button
                             id="refreshUsersButton"
                             icon="sap-icon://refresh"
@@ -32,10 +50,12 @@
                             press=".onRefresh"
                         />
                         <Button
-											id="sortUsersButton"
-											icon="sap-icon://sort"
-											tooltip="{i18n>sortButtonText}"
-											press="onSort"/>
+                            id="sortUsersButton"
+                            icon="sap-icon://sort"
+                            enabled="{= !${appView>/hasUIChanges}}"
+                            tooltip="{i18n>sortButtonText}"
+                            press="onSort"
+                        />
                     </content>
                 </OverflowToolbar>
             </headerToolbar>
@@ -74,31 +94,56 @@
             <items>
                 <ColumnListItem id="_IDGenColumnListItem1">
                     <cells>
-                        <Text
+                        <Input
                             id="_IDGenTextID"
-                            text="{ID}"
+                            value="{ID}"
+                            valueLiveUpdate="true"
+							liveChange=".onInputChange"
+                           
                         />
                     </cells>
                     <cells>
-                        <Text
+                        <Input
                             id="_IDGenTextNome"
-                            text="{Nome}"
+                            value="{Nome}"
+                            valueLiveUpdate="true"
+							liveChange=".onInputChange"
                         />
                     </cells>
                     <cells>
-                        <Text
+                        <Input
                             id="_IDGenTextGenero"
-                            text="{Genero}"
+                            value="{Genero}"
+                            valueLiveUpdate="true"
+							liveChange=".onInputChange"
                         />
                     </cells>
                     <cells>
-                        <Text
+                        <Input
                             id="_IDGenTextEstado"
-                            text="{Estado}"
+                            value="{Estado}"
+                            valueLiveUpdate="true"
+							liveChange=".onInputChange"
                         />
                     </cells>
                 </ColumnListItem>
             </items>
         </Table>
+
+        <footer>
+						<Toolbar id="_IDGenToolbar1" visible="{appView>/hasUIChanges}">
+							<ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+							<Button
+								id="saveButton"
+								type="Emphasized"
+								text="{i18n>saveButtonText}"
+								enabled="{= ${message>/}.length === 0 &amp;&amp; ${appView>/usernameEmpty} === false }"
+								press=".onSave"/>
+							<Button
+								id="doneButton"
+								text="{i18n>cancelButtonText}"
+								press=".onResetChanges"/>
+						</Toolbar>
+					</footer>
     </Page>
 </mvc:View>

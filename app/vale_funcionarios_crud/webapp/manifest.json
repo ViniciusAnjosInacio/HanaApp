@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "odatacrud",
+    "id": "valefuncionarioscrud",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:basic",
       "version": "1.11.5",
-      "toolsId": "2befd8f1-581a-49ec-9bbe-78636f578475"
+      "toolsId": "6f6957b1-2491-49b0-b336-5f526138c62e"
     },
     "dataSources": {
       "mainService": {
@@ -23,19 +23,6 @@
           "annotations": [],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
-        }
-      }
-    },
-    "crossNavigation": {
-      "inbounds": {
-        "item-display": {
-          "semanticObject": "item",
-          "action": "display",
-          "title": "{{flpTitle}}",
-          "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
         }
       }
     }
@@ -75,12 +62,11 @@
       "compact": true,
       "cozy": true
     },
-    "handleValidation": true,
     "models": {
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "odatacrud.i18n.i18n"
+          "bundleName": "valefuncionarioscrud.i18n.i18n"
         }
       },
       "": {
@@ -90,7 +76,8 @@
           "synchronizationMode": "None",
           "operationMode": "Server",
           "autoExpandSelect": true,
-          "earlyRequests": true
+          "earlyRequests": true,
+          "groupId": "$auto"
         }
       }
     },
@@ -106,7 +93,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "odatacrud.view",
+        "viewPath": "valefuncionarioscrud.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -131,7 +118,7 @@
       }
     },
     "rootView": {
-      "viewName": "odatacrud.view.App",
+      "viewName": "valefuncionarioscrud.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

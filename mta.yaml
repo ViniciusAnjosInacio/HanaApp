@@ -63,6 +63,10 @@ modules:
       - odatacrud.zip
       name: odatacrud
       target-path: resources/
+    - artifacts:
+      - valefuncionarioscrud.zip
+      name: valefuncionarioscrud
+      target-path: resources/
 - name: frontend
   type: html5
   path: app/frontend
@@ -76,6 +80,16 @@ modules:
 - name: odatacrud
   type: html5
   path: app/odata_crud
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: valefuncionarioscrud
+  type: html5
+  path: app/vale_funcionarios_crud
   build-parameters:
     build-result: dist
     builder: custom
