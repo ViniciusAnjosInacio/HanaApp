@@ -14,16 +14,16 @@ sap.ui.define(
     'sap/ui/export/Spreadsheet',
     'sap/ui/model/odata/v2/ODataModel'
   ],
-  function (Messaging, BaseController, MessageToast, MessageBox, Sorter, Filter, FilterOperator, FilterType, JSONModel,oModel, MockServer, exportLibrary, Spreadsheet, ODataModel) {
+  function (Messaging, BaseController, MessageToast, MessageBox, Sorter, Filter, FilterOperator, FilterType, JSONModel, MockServer, exportLibrary, Spreadsheet, ODataModel) {
     "use strict";
 
     var Edm = exportLibrary.EdmType;
 
     return BaseController.extend("valefuncionarioscrud.controller.App", {
 
- // Configuração do modelo para mensagens e tratamento de erros técnicos
- 
-      onInit: function () {  
+      // Configuração do modelo para mensagens e tratamento de erros técnicos
+
+      onInit: function () {
 
         var oModel = new JSONModel({
           selectedCountry: "BR",
@@ -32,12 +32,14 @@ sap.ui.define(
             { key: "AR", text: "Argentina" },
             { key: "ME", text: "México" }
           ],
-
+        
           genero: [
             { key: "F", text: "Feminino" },
             { key: "M", text: "Masculino" }
-        ]
+          ]
         });
+        
+        this.getView().setModel(oModel, "model");
 
         var oMessageModel = Messaging.getMessageModel(),
           oMessageModelBinding = oMessageModel.bindList("/", undefined, [],
@@ -58,73 +60,62 @@ sap.ui.define(
         this._bTechnicalErrors = false;
       },
 
-       // Exportação de dados para Excel
-      createColumnConfig: function() {
+      // Exportação de dados para Excel
+      createColumnConfig: function () {
         var aCols = [];
-  
+
         aCols.push({
           label: 'ID',
           type: Edm.Int32,
           property: 'ID',
           scale: 0
         });
-  
+
         aCols.push({
           property: 'Nome',
           type: Edm.String
         });
-  
+
         aCols.push({
           property: 'Genero',
           type: Edm.String
         });
-  
+
         aCols.push({
           property: 'Estado',
           type: Edm.String
         });
-  
+
         aCols.push({
-          property: 'Pais',
+          property: 'Pais_code',
           type: Edm.String,
           scale: 2,
           delimiter: true
         });
-  
+
         return aCols;
       },
-  
+
       // Exportação dos dados para um arquivo Excel
-      onExport: function() {
-        console.log("Exportação iniciada");
-        var aCols, oRowBinding, oSettings, oSheet, oTable;
-  
-        if (!this._oTable) {
-          this._oTable = this.byId('IDTabelaFuncionario');
-        }
-  
-        oTable = this._oTable;
-        oRowBinding = oTable.getBinding('items');
-        aCols = this.createColumnConfig();
-  
-        oSettings = {
-          workbook: {
-            columns: aCols,
-            hierarchyLevel: 'Level'
-          },
+      onExport: function () {
+        var oTable = this.byId('IDTabelaFuncionario');
+        var oRowBinding = oTable.getBinding('items');
+
+        var oSettings = {
+          workbook: { columns: this.createColumnConfig() },
           dataSource: oRowBinding,
-          fileName: 'tabela.xlsx',
-          worker: false 
+          fileName: 'Funcionarios.xlsx',
+          worker: false // Desabilitar o uso de trabalhador (worker) para uso local
         };
-  
-        oSheet = new Spreadsheet(oSettings);
-        oSheet.build().finally(function() {
-          oSheet.destroy();
+
+        var oSpreadsheet = new Spreadsheet(oSettings);
+        oSpreadsheet.build().finally(function () {
+          oSpreadsheet.destroy();
         });
       },
-  
+
       // Ações a serem executadas ao sair da aplicação
-      onExit: function() {
+      onExit: function () {
         this._oMockServer.stop();
       },
 
@@ -155,31 +146,31 @@ sap.ui.define(
       _generateNewID: function () {
         // Obtenha a referência para a tabela
         var oTable = this.byId("IDTabelaFuncionario");
-      
+
         // Obtenha a ligação dos itens da tabela
         var oBinding = oTable.getBinding("items");
-      
+
         // Obtenha a quantidade atual de itens na tabela
         var iTableLength = oBinding.getLength();
-      
+
         // Se a tabela estiver vazia, retorne 1 como o novo ID
         if (iTableLength === 0) {
           return 1;
         }
-      
+
         // Obtenha o contexto do último item na tabela
         var oLastItemContext = oBinding.getContexts()[iTableLength - 1];
-      
+
         // Obtenha o valor do ID do último item
         var iLastItemID = oLastItemContext.getProperty("ID");
-      
+
         // Adicione 1 ao ID do último item para obter o novo ID
         var iNewItemID = iLastItemID + 1;
-      
+
         return iNewItemID;
       },
 
-       // Exclusão de um item
+      // Exclusão de um item
       onDelete: function () {
         var oContext,
           oSelected = this.byId("IDTabelaFuncionario").getSelectedItem(),
@@ -214,7 +205,7 @@ sap.ui.define(
         }
       },
 
-       // Atualização da lista de itens
+      // Atualização da lista de itens
       onRefresh: function () {
         var oBinding = this.byId("IDTabelaFuncionario").getBinding("items");
 
@@ -275,7 +266,7 @@ sap.ui.define(
         oView.byId("IDTabelaFuncionario").getBinding("items").filter(oFilter, FilterType.Application);
       },
 
-       // Ordenação da lista de itens
+      // Ordenação da lista de itens
       onSort: function () {
         var oView = this.getView(),
           aStates = [undefined, "asc", "desc"],

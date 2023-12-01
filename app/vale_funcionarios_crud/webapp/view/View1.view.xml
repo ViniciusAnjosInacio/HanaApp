@@ -3,7 +3,7 @@
         <Page id="_IDGenPage1" title="{i18n>title}" class="customPageTitle">
             <headerContent>
                 <Button id="resetChangesButton" text="{i18n>resetChangesButtonText}" enabled="{= !${appView>/hasUIChanges}}" press=".onResetDataSource" type="Emphasized"/>
-                <Button id="_IDGenButton1" icon="sap-icon://excel-attachment" press="onExport"/>
+                <Button id="_IDGenButton1" icon="sap-icon://excel-attachment" press=".onExport"/>
             </headerContent>
             <content>
                 <Image src="https://upload.wikimedia.org/wikipedia/pt/thumb/c/cc/Logotipo_Vale.svg/1200px-Logotipo_Vale.svg.png" width="250px" height="100px" id="image0"/>
