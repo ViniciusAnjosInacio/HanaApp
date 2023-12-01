@@ -1,149 +1,96 @@
-<mvc:View
-    controllerName="valefuncionarioscrud.controller.App"
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
-    xmlns="sap.m"
->
-    <Page
-        id="_IDGenPage1"
-        title="{i18n>title}"
-    >
-        <Table
-            id="_IDGenTable1"
-            growing="true"
-            growingThreshold="5"
-            items="{
-		path: '/Funcionario',
-								parameters: {
-									$count: true,
-                                    $$updateGroupId : 'peopleGroup'
-								}
-                                }">
-                                
-            <headerToolbar>
-                <OverflowToolbar id="_IDGenOverflowToolbar1">
-                    <content>
-                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                        <SearchField
-                            id="searchField"
-                            width="20%"
-                            placeholder="{i18n>searchFieldPlaceholder}"
-                            enabled="{= !${appView>/hasUIChanges}}"
-                            search=".onSearch"
-                        />
+<mvc:View controllerName="valefuncionarioscrud.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:semantic="sap.f.semantic" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+    <App id="_IDGenApp1" busy="{appView/busy}" class="sapUiSizeCompact">
+        <Page id="_IDGenPage1" title="{i18n>title}" class="customPageTitle">
+            <headerContent>
+                <Button id="resetChangesButton" text="{i18n>resetChangesButtonText}" enabled="{= !${appView>/hasUIChanges}}" press=".onResetDataSource" type="Emphasized"/>
+                <Button id="_IDGenButton1" icon="sap-icon://excel-attachment" press="onExport"/>
+            </headerContent>
+            <content>
+                <Image src="https://upload.wikimedia.org/wikipedia/pt/thumb/c/cc/Logotipo_Vale.svg/1200px-Logotipo_Vale.svg.png" width="250px" height="100px" id="image0"/>
+                <Table id="IDTabelaFuncionario" growing="true" growingThreshold="6" items="{       path: '/Funcionario',    parameters: {    $count: true,             $$updateGroupId : 'peopleGroup'         }                                 }" mode="SingleSelectLeft">
+                    <headerToolbar>
+                        <OverflowToolbar id="_IDGenOverflowToolbar1">
+                            <content>
+                                <ToolbarSpacer id="spacer0"/>
+                                <SearchField id="searchField" width="20%" placeholder="{i18n>searchFieldPlaceholder}" enabled="{= !${appView>/hasUIChanges}}" search=".onSearch"/>
 
-                        <Button
-											id="addUserButton"
-											icon="sap-icon://add"
-											tooltip="{i18n>createButtonText}"
-											press=".onCreate">
-											<layoutData>
-												<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="NeverOverflow"/>
-											</layoutData>
-										</Button>
+                                <Button id="addUserButton" icon="sap-icon://add" tooltip="{i18n>createButtonText}" press=".onCreate" class="myCustomButtonClass">
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="NeverOverflow"/>
+                                    </layoutData>
+                                </Button>
+                                <Button id="deleteUserButton" icon="sap-icon://delete" tooltip="{i18n>deleteButtonText}" press=".onDelete">
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData2" priority="NeverOverflow"/>
+                                    </layoutData>
+                                </Button>
 
-
-                        <Button
-                            id="refreshUsersButton"
-                            icon="sap-icon://refresh"
-                            tooltip="{i18n>refreshButtonText}"
-                            press=".onRefresh"
-                        />
-                        <Button
-                            id="sortUsersButton"
-                            icon="sap-icon://sort"
-                            enabled="{= !${appView>/hasUIChanges}}"
-                            tooltip="{i18n>sortButtonText}"
-                            press="onSort"
-                        />
-                    </content>
-                </OverflowToolbar>
-            </headerToolbar>
-            <columns>
-                <Column id="_IDGenColumn1">
-                    <Text
-                        id="_IDGenText1"
-                        text="ID"
-                    />
-                </Column>
-            </columns>
-            <columns>
-                <Column id="_IDGenColumn2">
-                    <Text
-                        id="_IDGenText2"
-                        text="Nome"
-                    />
-                </Column>
-            </columns>
-            <columns>
-                <Column id="_IDGenColumn3">
-                    <Text
-                        id="_IDGenText3"
-                        text="Genero"
-                    />
-                </Column>
-            </columns>
-            <columns>
-                <Column id="_IDGenColumn4">
-                    <Text
-                        id="_IDGenText4"
-                        text="Estado"
-                    />
-                </Column>
-            </columns>
-            <items>
-                <ColumnListItem id="_IDGenColumnListItem1">
-                    <cells>
-                        <Input
-                            id="_IDGenTextID"
-                            value="{ID}"
-                            valueLiveUpdate="true"
-							liveChange=".onInputChange"
-                           
-                        />
-                    </cells>
-                    <cells>
-                        <Input
-                            id="_IDGenTextNome"
-                            value="{Nome}"
-                            valueLiveUpdate="true"
-							liveChange=".onInputChange"
-                        />
-                    </cells>
-                    <cells>
-                        <Input
-                            id="_IDGenTextGenero"
-                            value="{Genero}"
-                            valueLiveUpdate="true"
-							liveChange=".onInputChange"
-                        />
-                    </cells>
-                    <cells>
-                        <Input
-                            id="_IDGenTextEstado"
-                            value="{Estado}"
-                            valueLiveUpdate="true"
-							liveChange=".onInputChange"
-                        />
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
-
-        <footer>
-						<Toolbar id="_IDGenToolbar1" visible="{appView>/hasUIChanges}">
-							<ToolbarSpacer id="_IDGenToolbarSpacer2"/>
-							<Button
-								id="saveButton"
-								type="Emphasized"
-								text="{i18n>saveButtonText}"
-								enabled="{= ${message>/}.length === 0 &amp;&amp; ${appView>/usernameEmpty} === false }"
-								press=".onSave"/>
-							<Button
-								id="doneButton"
-								text="{i18n>cancelButtonText}"
-								press=".onResetChanges"/>
-						</Toolbar>
-					</footer>
-    </Page>
+                                <Button id="refreshUsersButton" icon="sap-icon://refresh" tooltip="{i18n>refreshButtonText}" press="onRefresh"/>
+                                <Button id="sortUsersButton" icon="sap-icon://sort" enabled="{= !${appView>/hasUIChanges}}" tooltip="{i18n>sortButtonText}" press="onSort"/>
+                            </content>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="IDColuna1">
+                            <Text id="IDColunaText1" text="ID"/>
+                        </Column>
+                    </columns>
+                    <columns>
+                        <Column id="IDColuna2">
+                            <Text id="IDColunaText2" text="Nome"/>
+                        </Column>
+                    </columns>
+                    <columns>
+                        <Column id="IDColuna3">
+                            <Text id="IDColunaText3" text="Genero"/>
+                        </Column>
+                    </columns>
+                    <columns>
+                        <Column id="IDColuna4">
+                            <Text id="IDColunaText4" text="Estado"/>
+                        </Column>
+                    </columns>
+                    <columns>
+                        <Column id="IDColuna5">
+                            <Text id="IDColunaText5" text="País"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="_IDGenColumnListItem1">
+                            <cells>
+                                <Input id="_IDGenTextID" value="{ID}" valueLiveUpdate="true" liveChange=".onInputChange"/>
+                            </cells>
+                            <cells>
+                                <Input id="_IDGenTextNome" value="{Nome}" valueLiveUpdate="true" liveChange=".onInputChange"/>
+                            </cells>
+                            <cells>
+                                <ComboBox id="_IDGenComboBoxGenero" items="{ path: 'model>/genero' }" selectedKey="{Genero}">
+                                    <items>
+                                        <core:Item id="_IDGenItem2" key="{model>key}" text="{model>text}"/>
+                                    </items>
+                                </ComboBox>
+                            </cells>
+                            <cells>
+                                <Input id="_IDGenTextEstado" value="{Estado}" valueLiveUpdate="true" liveChange=".onInputChange"/>
+                            </cells>
+                            <cells>
+                                <ComboBox id="_IDGenComboBox1" items="{ path: 'model>/countries' }" selectedKey="{Pais_code}">
+                                    <items>
+                                        <core:Item id="_IDGenItem1" key="{model>key}" text="{model>text}"/>
+                                    </items>
+                                </ComboBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </content>
+            <footer>
+                <Toolbar id="_IDGenToolbar1" visible="{appView>/hasUIChanges}">
+                    <ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+                    <Button id="saveButton" type="Emphasized" text="{i18n>saveButtonText}" enabled="{= ${message>/}.length === 0 &amp;&amp; ${appView>/usernameEmpty} === false }" press=".onSave"/>
+                    <Button id="doneButton" text="{i18n>cancelButtonText}" press=".onResetChanges"/>
+                </Toolbar>
+            </footer>
+        </Page>
+    </App>
 </mvc:View>
