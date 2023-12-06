@@ -1,0 +1,117 @@
+<mvc:View
+    controllerName="projetovale2.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <App
+        id="_IDGenApp1"
+        busy="{appView>/busy}"
+        class="sapUiSizeCompact"
+    >
+        <Shell id="_IDGenShell1">
+            <Page
+                id="_IDGenPage1"
+                showHeader="false"
+                enableScrolling="true"
+                class="sapUiContentPadding"
+                showNavButton="false"
+            >
+                <content>
+                    <Table
+                        id="peopleList"
+                        growing="true"
+                        growingThreshold="6"
+                        items="{
+								path: '/Funcionario'
+							}"
+                    >
+                        <headerToolbar>
+                            <OverflowToolbar id="otbSubheader">
+                                <Title id="_IDGenTitle1"
+                                    text="{i18n>ListaFuncionarios}"
+                                    level="H2"
+                                />
+                                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                                <Button
+                                    id="editButton"
+                                    text="{i18n>Editar}"
+                                    type="Transparent"
+                                    press="onOpenMultiEdit"
+                                />
+                                <Button
+                                    id="saveButton"
+                                    text="Save"
+                                    type="Transparent"
+                                    press="onSave"
+                                    visible="false"
+                                />
+                                <Button
+                                    id="cancelButton"
+                                    text="Cancel"
+                                    type="Transparent"
+                                    press="onCancel"
+                                    visible="false"
+                                />
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column id="userNameColumn">
+                                <Text
+                                    id="_IDGenText1"
+                                    text="{i18n>ID}"
+                                />
+                            </Column>
+                            <Column id="firstNameColumn">
+                                <Text
+                                    id="_IDGenText2"
+                                    text="{i18n>Nome}"
+                                />
+                            </Column>
+                            <Column id="lastNameColumn">
+                                <Text
+                                    id="_IDGenText3"
+                                    text="{i18n>Genero}"
+                                />
+                            </Column>
+                            <Column id="ageColumn">
+                                <Text
+                                    id="_IDGenText4"
+                                    text="{i18n>Estado}"
+                                />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="_IDGenColumnListItem1">
+                                <cells>
+                                    <ObjectIdentifier
+                                        id="_IDGenObjectIdentifier1"
+                                        title="{ID}"
+                                    />
+                                </cells>
+                                <cells>
+                                    <ObjectIdentifier
+                                        id="_IDGenObjectIdentifier2"
+                                        text="{Nome}"
+                                    />
+                                </cells>
+                                <cells>
+                                    <ObjectIdentifier
+                                        id="_IDGenObjectIdentifier3"
+                                        text="{Genero}"
+                                    />
+                                </cells>
+                                <cells>
+                                    <ObjectIdentifier
+                                        id="_IDGenObjectIdentifier4"
+                                        text="{Estado}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </content>
+            </Page>
+        </Shell>
+    </App>
+</mvc:View>

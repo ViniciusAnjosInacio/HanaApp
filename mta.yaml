@@ -67,6 +67,10 @@ modules:
       - valefuncionarioscrud.zip
       name: valefuncionarioscrud
       target-path: resources/
+    - artifacts:
+      - projetovale2.zip
+      name: projetovale2
+      target-path: resources/
 - name: frontend
   type: html5
   path: app/frontend
@@ -90,6 +94,16 @@ modules:
 - name: valefuncionarioscrud
   type: html5
   path: app/vale_funcionarios_crud
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: projetovale2
+  type: html5
+  path: app/projeto_vale_2
   build-parameters:
     build-result: dist
     builder: custom
@@ -130,11 +144,20 @@ resources:
             ProxyType: Internet
             Type: HTTP
             URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: MyHANAApp-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
           existing_destinations_policy: update
       version: 1.0.0
     service: destination
     service-name: MyHANAApp-destination-service
     service-plan: lite
+  requires:
+  - name: srv-api
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

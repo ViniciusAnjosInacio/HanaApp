@@ -28,7 +28,8 @@
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
         "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
         "watch-odata_crud": "cds watch --open odata_crud/webapp/index.html?sap-ui-xx-viewCache=false",
-        "watch-vale_funcionarios_crud": "cds watch --open vale_funcionarios_crud/webapp/index.html?sap-ui-xx-viewCache=false"
+        "watch-vale_funcionarios_crud": "cds watch --open vale_funcionarios_crud/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-projeto_vale_2": "cds watch --open projeto_vale_2/webapp/index.html?sap-ui-xx-viewCache=false"
     },
     "cds": {
         "requires": {
