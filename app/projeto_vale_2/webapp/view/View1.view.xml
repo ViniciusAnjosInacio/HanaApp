@@ -25,6 +25,7 @@
                         items="{
 								path: '/Funcionario'
 							}"
+                            mode="SingleSelectLeft"
                     >
                         <headerToolbar>
                             <OverflowToolbar id="otbSubheader">
@@ -37,7 +38,25 @@
                                     id="editButton"
                                     text="{i18n>Editar}"
                                     type="Transparent"
-                                    press="onOpenMultiEdit"
+                                    press="onEdit"
+                                />
+                                <Button
+                                    id="deleteButton"
+                                    text="{i18n>Deletar}"
+                                    type="Transparent"
+                                    press="OnDelete"
+                                />
+                                <Button
+                                    id="addButton"
+                                    text="{i18n>Adicionar}"
+                                    type="Transparent"
+                                    press="OnAdd"
+                                />
+                                <Button
+                                    id="refreshButton"
+                                    text="{i18n>Atualizar}"
+                                    type="Transparent"
+                                    press="OnRefresh"
                                 />
                                 <Button
                                     id="saveButton"
@@ -53,6 +72,7 @@
                                     press="onCancel"
                                     visible="false"
                                 />
+
                             </OverflowToolbar>
                         </headerToolbar>
                         <columns>
