@@ -4,134 +4,49 @@
     displayBlock="true"
     xmlns="sap.m"
 >
-    <App
-        id="_IDGenApp1"
-        busy="{appView>/busy}"
-        class="sapUiSizeCompact"
-    >
-        <Shell id="_IDGenShell1">
-            <Page
-                id="_IDGenPage1"
-                showHeader="false"
-                enableScrolling="true"
-                class="sapUiContentPadding"
-                showNavButton="false"
-            >
-                <content>
-                    <Table
-                        id="peopleList"
-                        growing="true"
-                        growingThreshold="6"
-                        items="{
-								path: '/Funcionario'
-							}"
-                            mode="SingleSelectLeft"
-                    >
-                        <headerToolbar>
-                            <OverflowToolbar id="otbSubheader">
-                                <Title id="_IDGenTitle1"
-                                    text="{i18n>ListaFuncionarios}"
-                                    level="H2"
-                                />
-                                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                                <Button
-                                    id="editButton"
-                                    text="{i18n>Editar}"
-                                    type="Transparent"
-                                    press="onEdit"
-                                />
-                                <Button
-                                    id="deleteButton"
-                                    text="{i18n>Deletar}"
-                                    type="Transparent"
-                                    press="OnDelete"
-                                />
-                                <Button
-                                    id="addButton"
-                                    text="{i18n>Adicionar}"
-                                    type="Transparent"
-                                    press="OnAdd"
-                                />
-                                <Button
-                                    id="refreshButton"
-                                    text="{i18n>Atualizar}"
-                                    type="Transparent"
-                                    press="OnRefresh"
-                                />
-                                <Button
-                                    id="saveButton"
-                                    text="Save"
-                                    type="Transparent"
-                                    press="onSave"
-                                    visible="false"
-                                />
-                                <Button
-                                    id="cancelButton"
-                                    text="Cancel"
-                                    type="Transparent"
-                                    press="onCancel"
-                                    visible="false"
-                                />
-
-                            </OverflowToolbar>
-                        </headerToolbar>
-                        <columns>
-                            <Column id="userNameColumn">
-                                <Text
-                                    id="_IDGenText1"
-                                    text="{i18n>ID}"
-                                />
-                            </Column>
-                            <Column id="firstNameColumn">
-                                <Text
-                                    id="_IDGenText2"
-                                    text="{i18n>Nome}"
-                                />
-                            </Column>
-                            <Column id="lastNameColumn">
-                                <Text
-                                    id="_IDGenText3"
-                                    text="{i18n>Genero}"
-                                />
-                            </Column>
-                            <Column id="ageColumn">
-                                <Text
-                                    id="_IDGenText4"
-                                    text="{i18n>Estado}"
-                                />
-                            </Column>
-                        </columns>
-                        <items>
-                            <ColumnListItem id="_IDGenColumnListItem1">
-                                <cells>
-                                    <ObjectIdentifier
-                                        id="_IDGenObjectIdentifier1"
-                                        title="{ID}"
-                                    />
-                                </cells>
-                                <cells>
-                                    <ObjectIdentifier
-                                        id="_IDGenObjectIdentifier2"
-                                        text="{Nome}"
-                                    />
-                                </cells>
-                                <cells>
-                                    <ObjectIdentifier
-                                        id="_IDGenObjectIdentifier3"
-                                        text="{Genero}"
-                                    />
-                                </cells>
-                                <cells>
-                                    <ObjectIdentifier
-                                        id="_IDGenObjectIdentifier4"
-                                        text="{Estado}"
-                                    />
-                                </cells>
-                            </ColumnListItem>
-                        </items>
-                    </Table>
-                </content>
-            </Page>
-        </Shell>
-    </App>
+    <App id="_app">
+		<pages>
+			<sap.m.semantic:FullscreenPage xmlns:sap.m.semantic="sap.m.semantic" title="Organization Employees Overview" id="Page1" semanticRuleSet="Optimized" showFooter="false">
+			    <sap.m.semantic:content>
+                    <VBox width="100%" direction="Column" id="vbox" fitContainer="true" class="vbox">
+			            
+			                <List noDataText="Drop list items here" id="List" items="{
+                                path: '/Funcionario',
+                                parameters: {
+                                    $$operationMode : 'Server'
+                                }
+                            }">
+                                <items>
+                                <!-- <items>
+                                    <ObjectListItem type="Active" title="{name}" number="{ path: 'ID' }" id="EmployeeRow" press="OnSelectionChange"/>
+                                </items> -->
+                                    <ObjectListItem number="{ path: 'ID' }" type="Active" id="listItem" title="{model>ID}" press="OnSelectionChange">
+                                        <attributes>
+                                            <ObjectAttribute id="name" text="{Nome}"></ObjectAttribute>
+                                            <ObjectAttribute id="jobTitle" title="Job Title" text="{model>Genero}"></ObjectAttribute>
+                                            <ObjectAttribute id="address" title="Address (CEP, Number, Complement)" text="{model>address_CEP}, {model>address_number}, {model>address_complement}"></ObjectAttribute>
+                                            <ObjectAttribute id="email" title="Email" text="{model>email}"></ObjectAttribute>
+                                        </attributes>
+                                    </ObjectListItem>
+                                </items>
+                                <infoToolbar>
+                                    <Toolbar width="100%" id="__toolbar2" design="Solid">
+                                    <content>
+                                        <Button width="40px" id="Refresh" icon="sap-icon://refresh" type="Transparent" press="OnRefresh"/>
+                                        <Button width="40px" id="Add" icon="sap-icon://add" type="Transparent" press="OnAdd"/>
+                                        <Button width="40px" id="Edit" icon="sap-icon://edit" type="Transparent" press="OnEdit"/>
+                                        <Button width="40px" id="Delete" icon="sap-icon://delete" type="Transparent" press="OnDelete"/>
+                                        <SearchField id="searchField" width="20%" placeholder="Search Employee" enabled="{= !${appView>/hasUIChanges}}" search=".onSearch"/>
+                                    </content>
+                                    </Toolbar>
+                                </infoToolbar>
+			                </List>
+			            
+			        </VBox>
+			    </sap.m.semantic:content>
+			</sap.m.semantic:FullscreenPage>
+			<Page id="_page" title="{i18n>title}">
+			</Page>
+		</pages>
+	</App>
 </mvc:View>

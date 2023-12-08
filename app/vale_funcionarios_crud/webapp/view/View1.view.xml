@@ -167,6 +167,8 @@
                                     value="{Nome}"
                                     valueLiveUpdate="true"
                                     liveChange=".onInputChange"
+                                    
+
                                 />
                             </cells>
                             <cells>

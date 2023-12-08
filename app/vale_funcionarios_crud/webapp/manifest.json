@@ -36,6 +36,7 @@
       "phone@2": "",
       "tablet": "",
       "tablet@2": ""
+      
     },
     "deviceTypes": {
       "desktop": true,
@@ -56,6 +57,7 @@
         "sap.ui.generic.app": {},
         "sap.ui.table": {},
         "sap.ushell": {}
+        
       }
     },
     "contentDensities": {
@@ -122,6 +124,16 @@
       "type": "XML",
       "async": true,
       "id": "App"
+    },
+
+    "dataSources": {
+      "default": {
+        "uri": "https://port4004-workspaces-ws-7twx2.us10.trial.applicationstudio.cloud.sap/odata/v4/catalog/Funcionario",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
     }
   }
 }
