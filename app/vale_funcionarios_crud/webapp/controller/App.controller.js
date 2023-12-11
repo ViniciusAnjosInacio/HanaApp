@@ -32,13 +32,13 @@ sap.ui.define(
             { key: "AR", text: "Argentina" },
             { key: "ME", text: "México" }
           ],
-        
+
           genero: [
             { key: "F", text: "Feminino" },
             { key: "M", text: "Masculino" }
           ]
         });
-        
+
         this.getView().setModel(oModel, "model");
 
         var oMessageModel = Messaging.getMessageModel(),
@@ -173,7 +173,8 @@ sap.ui.define(
       // Exclusão de um item
       onDelete: function () {
         var oContext,
-          oSelected = this.byId("IDTabelaFuncionario").getSelectedItem(),
+          oPeopleList = this.byId("IDTabelaFuncionario"),
+          oSelected = oPeopleList.getSelectedItem(),
           sUserName;
 
         if (oSelected) {
@@ -183,13 +184,13 @@ sap.ui.define(
             MessageToast.show(this._getText("Funcionário deletado", [sUserName]));
           }.bind(this), function (oError) {
             this._setUIChanges();
-            if (oError.canceled) {
-              MessageToast.show(this._getText("Funcionário não deletado", [sUserName]));
-              return;
-            }
+            if (oContext === oPeopleList.getSelectedItem().getBindingContext()) {
+              this._setDetailArea(oContext);
+          }
             MessageBox.error(oError.message + ": " + sUserName);
           }.bind(this));
-          this._setUIChanges();
+          this._setDetailArea();
+          this._setUIChanges(true);
         }
       },
 
@@ -312,6 +313,10 @@ sap.ui.define(
         bMessageOpen = true;
       },
 
+      onSelectionChange : function (oEvent) {
+        this._setDetailArea(oEvent.getParameter("listItem").getBindingContext());
+    },
+
       // Obtenção de texto internacionalizado (i18n)
       _getText: function (sTextId, aArgs) {
         return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sTextId, aArgs);
@@ -334,7 +339,25 @@ sap.ui.define(
       _setBusy: function (bIsBusy) {
         var oModel = this.getView().getModel("appView");
         oModel.setProperty("/busy", bIsBusy);
-      }
+      },
+
+      /**
+         * Toggles the visibility of the detail area
+         *
+         * @param {object} [oUserContext] - the current user context
+         */
+      _setDetailArea : function (oUserContext) {
+        var oDetailArea = this.byId("detailArea"),
+            oLayout = this.byId("defaultLayout"),
+            oSearchField = this.byId("searchField");
+
+        oDetailArea.setBindingContext(oUserContext || null);
+        // resize view
+        oDetailArea.setVisible(!!oUserContext);
+        oLayout.setSize(oUserContext ? "60%" : "100%");
+        oLayout.setResizable(!!oUserContext);
+        oSearchField.setWidth(oUserContext ? "40%" : "20%");
+    }
 
     });
   });

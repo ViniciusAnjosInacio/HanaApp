@@ -23,10 +23,24 @@ entity Interactions_Items {
 };
 
 entity Funcionario {
-  key ID : Integer;
-  Nome   : String(100);
-  Estado : String(2);
-  Pais   : Country;
-  Genero : String(10);
+  key ID    : Integer;
+  Nome      : String(100);
+  Sobrenome : String(100);
+  Estado    : String(2);
+  Pais      : Country;
+  Genero    : String(10);
+  Email     : String(50);
+  Cargo     : String(50);
 };
+
+entity Endereco {
+  key ID: Integer;
+  Rua: String(100);
+  Cidade: String(100);
+  CEP: String(10);
+  Funcionario_ID: Integer;
+  Funcionario: Association to Funcionario on Funcionario_ID = ID;
+};
+
+
 

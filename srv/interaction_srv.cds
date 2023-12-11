@@ -10,4 +10,7 @@ service CatalogService {
 entity Funcionario
  as projection on interactions.Funcionario;
 
+ entity Endereco
+ as projection on interactions.Endereco;
+
 }
