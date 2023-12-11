@@ -70,7 +70,7 @@
                                 id="IDTabelaFuncionario"
                                 growing="true"
                                 growingThreshold="6"
-                                items="{       path: '/Funcionario',    parameters: {    $count: true,             $$updateGroupId : 'peopleGroup'         }                                 }"
+                                items="{       path: '/Funcionario' ,    parameters: {    $count: true,             $$updateGroupId : 'peopleGroup'         }                                 }"
                                 mode="SingleSelectLeft"
                                 selectionChange=".onSelectionChange"
                             >
@@ -338,7 +338,7 @@
                                                                 <f:fields>
                                                                     <Text
                                                                         id="_IDGenText2"
-                                                                        text="{/Endereco/Cidade}"
+                                                                        text="{Cidade}"
                                                                     />
                                                                 </f:fields>
                                                             </f:FormElement>
@@ -349,7 +349,7 @@
                                                                 <f:fields>
                                                                     <Text
                                                                         id="_IDGenText3"
-                                                                        text="{./Endereco/Rua}"
+                                                                        text="{Rua}"
                                                                     />
                                                                 </f:fields>
                                                             </f:FormElement>
